@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Shoot"
-run/main_scene="res://platform.tscn"
+run/main_scene="res://screens/splash.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Configuration="*res://scripts/configuration.gd"
 
 [rendering]
 

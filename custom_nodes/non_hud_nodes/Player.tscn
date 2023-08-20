@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://c35o0crvukuyk"]
+
+[ext_resource type="Texture2D" uid="uid://d1f0u2oacfxdj" path="res://assets/image/Transparent/tile_0240.png" id="1_2rr10"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_syb65"]
+[ext_resource type="Texture2D" uid="uid://cws71eiquk3iy" path="res://assets/image/Transparent/tile_0242.png" id="2_stlwv"]
+[ext_resource type="Texture2D" uid="uid://bc0kfaspkgndy" path="res://assets/image/Transparent/tile_0241.png" id="3_kbjsq"]
+[ext_resource type="Texture2D" uid="uid://desqlke1q3hoi" path="res://assets/image/Transparent/tile_0243.png" id="4_0m0fq"]
+[ext_resource type="Texture2D" uid="uid://64vf8wkyyigb" path="res://assets/image/Transparent/tile_0244.png" id="5_myeja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlxd5"]
+size = Vector2(2.5, 2.75)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m3e2h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2rr10")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_stlwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kbjsq")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kbjsq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0m0fq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_myeja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0m0fq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kbjsq")
+}],
+"loop": true,
+"name": &"running",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+slide_on_ceiling = false
+script = ExtResource("1_syb65")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_vlxd5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_m3e2h")
+animation = &"jump"
+frame = 1
+
+[node name="Area2D" type="Area2D" parent="." groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2.5)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_vlxd5")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

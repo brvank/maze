@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgshpx5tqxwme"]
+
+[ext_resource type="Script" path="res://scripts/back_button.gd" id="1_1pq8k"]
+[ext_resource type="Script" path="res://scripts/levels.gd" id="1_77tun"]
+[ext_resource type="Texture2D" uid="uid://dxts7sr4sr8un" path="res://assets/image/Transparent/tile_0092.png" id="2_hhgsa"]
+
+[node name="LevelContainer" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0.392157, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 0
+
+[node name="TextureButton" type="TextureButton" parent="ColorRect/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("2_hhgsa")
+script = ExtResource("1_1pq8k")
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Levels" type="GridContainer" parent="ColorRect/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+script = ExtResource("1_77tun")
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/MarginContainer2/TextureButton" to="ColorRect/VBoxContainer/MarginContainer2/TextureButton" method="_on_pressed"]
+[connection signal="item_rect_changed" from="ColorRect/VBoxContainer/MarginContainer/Levels" to="ColorRect/VBoxContainer/MarginContainer/Levels" method="_on_item_rect_changed" flags=18]
